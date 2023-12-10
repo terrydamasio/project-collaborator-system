@@ -1,0 +1,46 @@
+    <main>
+        <h1>Colaboradores</h1>
+        <button class="btn-novo-colaborador"><a href="/inserirColaborador">Inserir Novo Colaborador</a></button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($this->view->colaboradores as $colaborador) { ?>
+                    <tr>
+                        <td><?= $colaborador['matricula'] ?></td>
+                        <td><?= $colaborador['nome'] ?></td>
+                        <td><?= $colaborador['email'] ?></td>
+                        <td><?= $colaborador['nome_cargo'] ?></td>
+                        <td>
+                            <a href="/editar" class="btn-editar" title="Editar"><i class="fas fa-edit"></i></a>
+                            <a href="" class="btn-excluir" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <div>
+            <ul class="pagination">
+                <li><a href="?pagina=1" tabindex="-1">&laquo; Primeira</a></li>
+
+                <?php for($i = 1; $i <= $this->view->total_de_paginas; $i++) { ?>
+                    <li class="<?=$this->view->pagina_ativa == $i ? 'active' : ''?>">
+                        <a href="?pagina=<?=$i?>"><?= $i ?></a>
+                    </li>
+                <?php }?>
+
+                <!-- Adicione mais páginas conforme necessário -->
+
+                <!-- Botões de navegação -->
+                <li><a href="?pagina=<?=$this->view->total_de_paginas?>">Última &raquo;</a></li>
+            </ul>
+        </div>
+    </main>

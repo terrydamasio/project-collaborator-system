@@ -1,0 +1,112 @@
+    <main>
+        <h1>Alterar Dados do Colaborador</h1>
+        <form action="#" method="post">
+            <div class="box-grande">
+
+                <div class="linha">
+                    <div class="campo">
+                        <label for="matricula">Matrícula</label>
+                        <input type="text" id="matricula" name="matricula" disabled>
+                    </div>
+                    <div class="campo">
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" name="cpf" disabled>
+                    </div>
+                    <div class="campo">
+                        <label for="usuario">Usuário</label>
+                        <input type="text" id="usuario" name="usuario" disabled>
+                    </div>
+                    <div class="campo">
+                        <label for="ativo">Ativo?</label>
+                        <input type="checkbox" id="ativo" name="ativo" disabled>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="campo campo-nome">
+                        <label for="nome">Nome*</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="campo">
+                        <label for="data_nascimento">Data de Nascimento*</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento" required>
+                    </div>
+                    <div class="campo">
+                        <label for="data_admissao">Data de Admissão*</label>
+                        <input type="date" id="data_admissao" name="data_admissao" required>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="campo">
+                        <label for="email">Email*</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="campo">
+                        <label for="cargos">Cargo*</label>
+                        <select id="cargos" name="cargo" required>
+                            <option value="cargo1">Cargo 1</option>
+                            <option value="cargo2">Cargo 2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <div class="campo">
+                        <label for="funcao">Função*</label>
+                        <select id="funcao" name="funcao" required>
+                            <option value="funcao1">Função 1</option>
+                            <option value="funcao2">Função 2</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="data_rescisao">Data de Rescisão</label>
+                        <input type="date" id="data_rescisao" name="data_rescisao">
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <label for="horarios">Horários</label>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Segunda</th>
+                                <th>Terça</th>
+                                <th>Quarta</th>
+                                <th>Quinta</th>
+                                <th>Sexta</th>
+                                <th>Sábado</th>
+                                <th>Domingo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Entrada</td>
+                                <td><input type="time" name="segunda_entrada"></td>
+                                <td><input type="time" name="terca_entrada"></td>
+                                <td><input type="time" name="quarta_entrada"></td>
+                                <td><input type="time" name="quinta_entrada"></td>
+                                <td><input type="time" name="sexta_entrada"></td>
+                                <td><input type="time" name="sabado_entrada"></td>
+                                <td><input type="time" name="domingo_entrada"></td>
+                            </tr>
+                            <tr>
+                                <td>Saída</td>
+                                <td><input type="time" name="segunda_saida"></td>
+                                <td><input type="time" name="terca_saida"></td>
+                                <td><input type="time" name="quarta_saida"></td>
+                                <td><input type="time" name="quinta_saida"></td>
+                                <td><input type="time" name="sexta_saida"></td>
+                                <td><input type="time" name="sabado_saida"></td>
+                                <td><input type="time" name="domingo_saida"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="submit"><i class="fas fa-save"></i> Alterar Registro</button>
+            </div>
+
+        </form>
+    </main>

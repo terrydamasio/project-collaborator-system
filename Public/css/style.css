@@ -1,0 +1,196 @@
+/* CONFIGURAÇÕES GERAIS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* NAVBAR */
+.nav {
+    width: 100%;
+    box-shadow: 4px 5px 10px rgba(0,0,0,.2);
+    background-color: #f5f8fa;
+}
+header {
+    background-color: #f5f8fa;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    max-width: 1230px;
+}
+
+.logo img {
+    display: flex;
+    width: 120px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #238EDE;
+    font-size: 1.2em;
+}
+
+/* MAIN */
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #238EDE;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.box-grande {
+    border: 1px solid #fff;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.linha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 15px;
+}
+
+.campo {
+    flex: 1;
+}
+
+.campo #nome {
+    width: 100%; 
+}
+
+.campo #email {
+    width: 100%; 
+}
+
+.campo #cargos {
+    width: 100%; 
+}
+
+.campo #funcao {
+    width: 100%; 
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+input[type="time"] {
+    margin-bottom: 5px;
+}
+
+th {
+    background-color: #238EDE;
+    color: #fff;
+}
+
+.btn-editar, .btn-excluir {
+    color: #238EDE;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.btn-novo-colaborador {
+    background-color: #238EDE;
+}
+
+.btn-novo-colaborador a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-novo-colaborador:hover, .btn-editar:hover, .btn-excluir:hover {
+    color: #0056b3;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilo para o checkbox não marcado */
+input[type="checkbox"] {
+    border: 2px solid #3498db;
+    width: 20px;
+    height: 20px;
+}
+
+/* Estilo para o checkbox marcado */
+input[type="checkbox"]:checked {
+    color: #3498db;
+}
+
+.pagination-container {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pagination li {
+    margin-right: 5px;
+}
+
+.pagination a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #2980b9;
+}
