@@ -132,14 +132,17 @@ th {
 
 .btn-novo-colaborador {
     background-color: #238EDE;
+    text-decoration: none;
+    color: #fff;
+    padding: 8px;
 }
 
-.btn-novo-colaborador a {
-    text-decoration: none;
+.btn-novo-colaborador:hover {
+    background-color: #0056b3;
     color: #fff;
 }
 
-.btn-novo-colaborador:hover, .btn-editar:hover, .btn-excluir:hover {
+.btn-editar:hover, .btn-excluir:hover {
     color: #0056b3;
 }
 
@@ -191,6 +194,76 @@ input[type="checkbox"]:checked {
     transition: background-color 0.3s;
 }
 
-.pagination a:hover {
-    background-color: #2980b9;
+.pagination a.active {
+    background-color: #0056b3;
 }
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    text-align: center;
+    z-index: 1000;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-remover,
+.btn-cancelar {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-remover {
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-remover:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancelar {
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-cancelar:hover {
+    background-color: #ce2f0f;
+}
+
+.btn-voltar {
+    background-color: #3498db;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.btn-voltar:hover {
+    background-color: #0056b3;
+}
+

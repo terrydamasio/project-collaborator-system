@@ -12,17 +12,17 @@
                 'controller' => 'IndexController',
                 'action' => 'index'
             );
+            
+            $routes['autenticar'] = array(
+				'route' => '/autenticar',
+				'controller' => 'AuthController',
+				'action' => 'autenticar'
+			);
 
-            $routes['editar'] = array(
-                'route' => '/editar',
+            $routes['registrar'] = array(
+                'route' => '/registrar',
                 'controller' => 'IndexController',
-                'action' => 'editar'
-            );
-
-            $routes['inserirColaborador'] = array(
-                'route' => '/inserirColaborador',
-                'controller' => 'IndexController',
-                'action' => 'inserirColaborador'
+                'action' => 'registrar'
             );
 
             $routes['inserir'] = array(
@@ -30,6 +30,24 @@
                 'controller' => 'IndexController',
                 'action' => 'inserir'
             );
+
+            $routes['editar'] = array(
+                'route' => '/editar',
+                'controller' => 'IndexController',
+                'action' => 'editar'
+            );
+
+            $routes['saveEdit'] = array(
+                'route' => '/saveEdit',
+                'controller' => 'IndexController',
+                'action' => 'saveEdit'
+            );
+
+            $routes['sair'] = array(
+				'route' => '/sair',
+				'controller' => 'AuthController',
+				'action' => 'sair'
+			);
 
             $this->setRoutes($routes);
         }   

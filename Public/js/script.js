@@ -30,15 +30,15 @@ $(document).ready(function() {
                     alert('CPF já existe. Os demais campos serão bloqueados.');
 
                     // Desabilita todos os campos do formulário, exceto o campo de CPF
-                    $('input, select').not('#cpf').prop('disabled', true);
+                    $('input, select, button').not('#cpf').prop('disabled', true);
                 } else {
                     // Se o CPF não existe, habilita todos os campos
-                    $('input, select').prop('disabled', false);
+                    $('input, select, button').prop('disabled', false);
                 }
             });
         } else {
             // Se o CPF tem um ou nenhum caractere, habilita todos os campos
-            $('input, select').prop('disabled', false);
+            $('input, select, button').prop('disabled', false);
         }
     });
 });

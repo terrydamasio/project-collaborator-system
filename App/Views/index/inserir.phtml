@@ -40,9 +40,9 @@
                     <div class="campo">
                         <label for="cargos">Cargo*</label> 
                         <select id="cargos" name="cargo" required>
-                        <?php foreach($this->view->cargos as $cargo) { ?> 
-                            <option value="<?= $cargo['id_cargo'] ?>"><?= $cargo['nome_cargo'] ?></option>
-                        <?php } ?>
+                            <?php foreach($this->view->cargos as $cargo) { ?> 
+                                <option value="<?= $cargo['id_cargo'] ?>"><?= $cargo['nome_cargo'] ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -51,9 +51,9 @@
                     <div class="campo">
                         <label for="funcao">Função*</label>
                         <select id="funcao" name="funcao" required>
-                        <?php foreach($this->view->funcoes as $funcao) { ?> 
-                            <option value="<?= $funcao['id_funcao'] ?>"><?= $funcao['nome_funcao'] ?></option>
-                        <?php } ?>
+                            <?php foreach($this->view->funcoes as $funcao) { ?> 
+                                <option value="<?= $funcao['id_funcao'] ?>"><?= $funcao['nome_funcao'] ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                     <div class="campo">
@@ -61,8 +61,8 @@
                         <input type="date" id="data_rescisao" name="data_rescisao">
                     </div>
                     <div class="campo">
-                        <label for="usuario">Usuário*</label>
-                        <input type="text" id="usuario" name="usuario" readonly>
+                        <label for="usuario">Usuário*</label> 
+                        <input type="text" id="usuario" name="usuario" readonly> <!-- readonly -->
                     </div>
                 </div>
 
