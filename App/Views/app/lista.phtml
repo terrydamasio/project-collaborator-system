@@ -1,0 +1,63 @@
+    <main>
+        <h1>Colaboradores</h1>
+        <a href="/registrar" class="btn-novo-colaborador">Inserir Novo Colaborador</a> 
+            <?php if ($_GET['sucesso'] && $_GET['sucesso'] == 'remover') { ?>
+                <p style="color: green;">Colaborador removido com sucesso!</p>
+            <?php } if ($_GET['sucesso'] && $_GET['sucesso'] == 'inserir') { ?>
+                <p style="color: green;">Colaborador inserido com sucesso!</p>
+            <?php } if ($_GET['sucesso'] && $_GET['sucesso'] == 'alterar') { ?>
+                <p style="color: green;">Dados do colaborador alterados com sucesso!</p>
+            <?php } if ($_GET['erro'] && $_GET['erro'] == 'acesso') { ?>
+                <p style="color: red;">Erro ao tentar acessar dados de usuário.</p>
+            <?php } ?>
+
+            <?php if($this->view->remover) { ?>
+                <div class="card">
+                    <h2>Excluir Usuário</h2>
+                    <br>
+                    <p>Tem certeza que deseja excluir o usuário?</p>
+                    <div class="button-container">
+                        <a href="?remover=sim&matricula=<?=$this->view->matricula?>" class="btn-remover">Excluir</a>
+                        <a href="?remover=nao" class="btn-cancelar">Cancelar</a>
+                    </div>
+                </div>
+            <?php } ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($this->view->colaboradores as $colaborador) { ?>
+                    <tr>
+                        <td><?= $colaborador['matricula'] ?></td>
+                        <td><?= $colaborador['nome'] ?></td>
+                        <td><?= $colaborador['email'] ?></td>
+                        <td><?= $colaborador['nome_cargo'] ?></td>
+                        <td>
+                            <a href="/editar?&matricula=<?=$colaborador['matricula']?>" class="btn-editar" title="Editar"><i class="fas fa-edit"></i></a>
+                            <a href="?remover=card&matricula=<?=$colaborador['matricula']?>" class="btn-excluir" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <div>
+            <ul class="pagination">
+                <li><a href="?pagina=1" tabindex="-1">&laquo; Primeira</a></li>
+
+                <?php for($i = 1; $i <= $this->view->total_de_paginas; $i++) { ?>
+                    <li>
+                        <a href="?pagina=<?=$i?>" class="<?=$this->view->pagina_ativa == $i ? 'active' : ''?>"><?= $i ?></a>
+                    </li>
+                <?php }?>
+
+                <li><a href="?pagina=<?=$this->view->total_de_paginas?>">Última &raquo;</a></li>
+            </ul>
+        </div>
+    </main>

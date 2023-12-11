@@ -56,3 +56,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function atualizarHora() {
+    const dataAtual = new Date();
+    const hora = String(dataAtual.getHours()).padStart(2, '0');
+    const minutos = String(dataAtual.getMinutes()).padStart(2, '0');
+
+    document.getElementById('hora').textContent = `${hora}:${minutos}`;
+}
+
+function registrarPonto() {
+    const formulario = document.getElementById('formulario-registro');
+    const nome = formulario.elements.nome.value;
+    const matricula = formulario.elements.matricula.value;
+    const entrada = formulario.elements.entrada.value;
+    const saida = formulario.elements.saida.value;
+
+    // Aqui você pode enviar os dados para o servidor (usando AJAX ou algo similar) para o registro no banco de dados
+    // Por enquanto, apenas exibimos os dados no console
+    console.log(`Nome: ${nome}, Matrícula: ${matricula}, Entrada: ${entrada}, Saída: ${saida}`);
+}
+
+// Atualizar a hora a cada segundo
+setInterval(atualizarHora, 1000);
+
+// Atualizar a data
+const dataAtualFormatada = new Date().toLocaleDateString();
+document.getElementById('data').textContent = dataAtualFormatada;
+
+
+$(document).ready(function() {
+    // Adicione um evento para verificar o campo "Ativo?" ao vivo
+    $('#data_rescisao').on('input', function() {
+        var dataRescisao = $(this).val();
+
+        // Envia a data de rescisão para o servidor usando AJAX
+        $.post('/registrar', { data_rescisao: dataRescisao }, function(data) {
+            var response = JSON.parse(data);
+
+            // Atualiza dinamicamente o campo "Ativo?"
+            $('#ativo').prop('checked', response.ativo);
+        });
+    });
+});

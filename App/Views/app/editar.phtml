@@ -5,19 +5,18 @@
             <div class="box-grande">
                 
                 <div class="linha">
-                    
-                        <div class="campo">
-                            <label for="matricula">Matrícula</label>
-                            <input type="text" id="matricula" name="matricula" value="<?= $colaborador['matricula'] ?>" readonly> <!-- readonly -->
-                        </div>
-                        <div class="campo">
-                            <label for="cpf">CPF</label>
-                            <input type="text" id="cpf" name="cpf" value="<?= $colaborador['cpf'] ?>" readonly> <!-- readonly -->
-                        </div>
-                        <div class="campo">
-                            <label for="usuario">Usuário</label>
-                            <input type="text" id="usuario" name="usuario" value="<?= $colaborador['usuario'] ?>" readonly> <!-- readonly -->
-                        </div>
+                    <div class="campo">
+                        <label for="matricula">Matrícula</label>
+                        <input type="text" id="matricula" name="matricula" value="<?= $colaborador['matricula'] ?>" readonly> <!-- readonly -->
+                    </div>
+                    <div class="campo">
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" name="cpf" value="<?= $colaborador['cpf'] ?>" readonly> <!-- readonly -->
+                    </div>
+                    <div class="campo">
+                        <label for="usuario">Usuário</label>
+                        <input type="text" id="usuario" name="usuario" value="<?= $colaborador['usuario'] ?>" readonly> <!-- readonly -->
+                    </div>
                     
                     <div class="campo">
                         <label for="ativo">Ativo?</label>
@@ -132,7 +131,7 @@
                 </div>
 
                 <button type="submit">Alterar Registro</button>
-                <a class="btn-voltar" href="/">Voltar</a>
+                <a class="btn-voltar" href="/lista">Voltar</a>
             </div>
 
         </form>

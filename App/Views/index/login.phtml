@@ -1,0 +1,18 @@
+
+    <form action="/autenticar" method="post">
+        <div class="form-header">
+            <h1>Login do Administrador</h1>
+            <label for="username">Usuario</label>
+            <input id="username" type="text" name="usuario" placeholder="Digite seu usuario adm" required>
+
+            <label for="password">Senha</label>
+            <input id="password" type="password" name="senha" placeholder="Digite a senha adm" required>
+
+            <?php if(isset($_GET['erro']) && $_GET['erro'] == 'acessonegado') { ?>
+                <p class="error-message">Usuário ou senha inválidos.</p>
+            <?php } if(isset($_GET['login']) && $_GET['login'] == 'erro') { ?>
+                <p class="error-message">Acesso Negado.</p>
+            <?php } ?>
+            <br><button type="submit">Login</button>
+        </div>
+    </form>

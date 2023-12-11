@@ -12,34 +12,47 @@
                 'controller' => 'IndexController',
                 'action' => 'index'
             );
-            
+
+            $routes['login'] = array(
+				'route' => '/login',
+				'controller' => 'IndexController',
+				'action' => 'login'
+			);
+
             $routes['autenticar'] = array(
 				'route' => '/autenticar',
 				'controller' => 'AuthController',
 				'action' => 'autenticar'
 			);
+            
+
+            $routes['lista'] = array(
+                'route' => '/lista',
+                'controller' => 'AppController',
+                'action' => 'lista'
+            );
 
             $routes['registrar'] = array(
                 'route' => '/registrar',
-                'controller' => 'IndexController',
+                'controller' => 'AppController',
                 'action' => 'registrar'
             );
 
             $routes['inserir'] = array(
                 'route' => '/inserir',
-                'controller' => 'IndexController',
+                'controller' => 'AppController',
                 'action' => 'inserir'
             );
 
             $routes['editar'] = array(
                 'route' => '/editar',
-                'controller' => 'IndexController',
+                'controller' => 'AppController',
                 'action' => 'editar'
             );
 
             $routes['saveEdit'] = array(
                 'route' => '/saveEdit',
-                'controller' => 'IndexController',
+                'controller' => 'AppController',
                 'action' => 'saveEdit'
             );
 
