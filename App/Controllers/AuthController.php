@@ -3,6 +3,9 @@
 
 	use MF\Controller\Action;
 	use MF\Model\Container;
+    use App\Session;
+
+    session_start();
 
 	class AuthController extends Action {
 
@@ -13,21 +16,19 @@
                 $adm->__set('usuario', $_POST['usuario']);
                 $adm->__set('senha', $_POST['senha']);
                 
-                $autenticar = $adm->autenticar();
-
+                $result = $adm->autenticar();
+                
                 //validar usuario autenticado
-                if($autenticar->rowCount() > 0) {
-                    session_start();
-
-                    $row = $autenticar->fetchObject();
-                    $_SESSION['id_adm'] = $adm->__get('id_adm');
-                    $_SESSION['usuario'] = $adm->__get('usuario'); 
-
-                    echo $_SESSION['id_adm'];
-                    echo $_SESSION['usuario'];
+                if($result->rowCount() > 0) {
+                    $row = $result->fetchObject();
+  
+                    $_SESSION['id_adm'] = $row->id_adm;
+                    $_SESSION['usuario'] = $row->usuario;
+                    $_SESSION['senha'] = $row->senha;
 
                     header('location: /lista');
                 } else {
+                    echo "OI";
                     header('location: /login?erro=acessonegado');
                 }
             } else {

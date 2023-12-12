@@ -1,19 +1,27 @@
 <?php
     namespace App\Controllers;
 
-    use Exception;
     use MF\Controller\Action;
     use MF\Model\Container;
+    use App\Session;
+
+    session_start();
 
     class AppController extends Action {
         
         public function lista() {
-            //verificar se os dados estão preenchidos para mostrar a página restrita
-            //$this->validaAutenticacao();
 
+            $this->validaAutenticacao();
+            
+            $this->setupPagination();
+
+            $this->handleColaboradorRemoval();
+
+            $this->render('lista', 'layout1');
+        }
+
+        private function setupPagination() {
             $colaboradores = Container::getModel('Colaboradores');
-
-            //variáveis de paginação
             $total_registros_pagina = 7;
             $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
             $deslocamento = ($pagina - 1) * $total_registros_pagina;
@@ -22,12 +30,13 @@
             $total_colaboradores = $colaboradores->getColaboradores();
             $this->view->total_de_paginas = ceil($total_colaboradores['total'] / $total_registros_pagina);
             $this->view->pagina_ativa = $pagina;
+        }
 
-            //remoção de colaboradores
+        private function handleColaboradorRemoval() {
             $this->view->remover = isset($_GET['remover']) ? $_GET['remover'] : '';
             $this->view->matricula = isset($_GET['matricula']) ? $_GET['matricula'] : '';
 
-            if ($_GET['remover'] && $_GET['remover'] == 'sim' && $this->view->matricula) { 
+            if ($this->shouldRemoveColaborador()) { 
                 $colaboradores = Container::getModel('Colaboradores');
                 $colaboradores->__set('matricula', $this->view->matricula);
                 $colaboradores->deletarColaborador();
@@ -37,13 +46,15 @@
             } else if ($_GET['remover'] && $_GET['remover'] == 'nao') {
                 header('location: /lista');
             }
+        }
 
-            $this->render('lista', 'layout1');
+        private function shouldRemoveColaborador() {
+            return $_GET['remover'] && $_GET['remover'] == 'sim' && $this->view->matricula;
         }
 
         public function registrar() {
-            //verificar se os dados estão preenchidos para mostrar a página restrita
-            //$this->validaAutenticacao();
+
+            $this->validaAutenticacao();
 
             //Criação dinâmica de cargos funcoes e verificação de email
             $cargos = Container::getModel('Cargos');
@@ -58,13 +69,54 @@
             }
         }
 
+        //valida e define o padrão de expressão regular para um endereço de e-mail válido
+        private function validarEmail($email) {
+            $email = trim($email);
+            $padrao = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+
+            if (preg_match($padrao, $email)) {
+                return false; 
+            } else {
+                return true; 
+            }
+        }
+
+        public function verificarAtivo() {
+            $dataRescisao = $_POST['data_rescisao'];
+    
+            // Verifica se a data de rescisão não está preenchida ou é menor que a data atual
+            $ativo = empty($dataRescisao) || strtotime($dataRescisao) < time();
+    
+            echo json_encode(['ativo' => $ativo]);
+        }
+
+        //editar os dados do colaborador
+        public function editar() {
+            
+            $this->validaAutenticacao();
+
+            $colaboradores = Container::getModel('Colaboradores');
+            $cargos = Container::getModel('Cargos');
+            $this->view->cargos = $cargos->getCargos();
+            $this->view->funcoes = $cargos->getFuncoes();   
+            
+            $this->view->matricula = isset($_GET['matricula']) ? $_GET['matricula'] : '';
+                
+            if(!empty($_GET['matricula']) && $this->view->matricula) { 
+                $this->view->matricula = $_GET['matricula'];                   
+                $colaboradores->__set('matricula', $this->view->matricula);
+
+                $this->view->colaborador = $colaboradores->selectColaborador();
+                
+            }
+
+            $this->render('editar', 'layout1');
+        }
+
         //inserir os dados do colaborador
         public function inserir() {
             try {
-
-                //verificar se os dados estão preenchidos para mostrar a página restrita
-                //$this->validaAutenticacao();
-
+                
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $colaboradores = Container::getModel('Colaboradores');
 
@@ -171,56 +223,8 @@
             }
         }
 
-        //valida e define o padrão de expressão regular para um endereço de e-mail válido
-        public function validarEmail($email) {
-            $email = trim($email);
-            $padrao = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
-
-            if (preg_match($padrao, $email)) {
-                return false; 
-            } else {
-                return true; 
-            }
-        }
-
-        public function verificarAtivo() {
-            $dataRescisao = $_POST['data_rescisao'];
-    
-            // Verifica se a data de rescisão não está preenchida ou é menor que a data atual
-            $ativo = empty($dataRescisao) || strtotime($dataRescisao) < time();
-    
-            echo json_encode(['ativo' => $ativo]);
-        }
-
-        //editar os dados do colaborador
-        public function editar() {
-            //verificar se os dados estão preenchidos para mostrar a página restrita
-            //$this->validaAutenticacao();
-            
-            $colaboradores = Container::getModel('Colaboradores');
-            $cargos = Container::getModel('Cargos');
-            $this->view->cargos = $cargos->getCargos();
-            $this->view->funcoes = $cargos->getFuncoes();   
-            
-            $this->view->matricula = isset($_GET['matricula']) ? $_GET['matricula'] : '';
-                
-            if(!empty($_GET['matricula']) && $this->view->matricula) { 
-                $this->view->matricula = $_GET['matricula'];                   
-                $colaboradores->__set('matricula', $this->view->matricula);
-
-                $this->view->colaborador = $colaboradores->selectColaborador();
-                
-            }
-
-            $this->render('editar', 'layout1');
-        }
-
-
         public function saveEdit() {
             try{ 
-
-                //verificar se os dados estão preenchidos para mostrar a página restrita
-                //$this->validaAutenticacao();
 
                 $colaboradores = Container::getModel('Colaboradores');
 
@@ -300,13 +304,16 @@
             }
         }
 
-        public function validaAutenticacao() {
+        private function validaAutenticacao() {
             session_start();
             
-            if(!isset($_SESSION['id_adm']) || $_SESSION['id_adm'] == '' || !isset($_SESSION['usuario']) || $_SESSION['usuario'] == '') {
+            if(!$this->isAuthenticated()) {
                 header('location: /login?login=erro');
             } 
         }
 
+        private function isAuthenticated() {
+            return isset($_SESSION['id_adm']) && $_SESSION['id_adm'] != '' && isset($_SESSION['usuario']) && $_SESSION['usuario'] != '';
+        }
 
     }

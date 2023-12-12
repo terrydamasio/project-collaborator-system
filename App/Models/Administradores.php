@@ -19,12 +19,16 @@
         }
 
         public function autenticar() {
-            $query = "select id_adm, usuario, senha from administradores where usuario = :usuario and senha = :senha";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindValue(":usuario", $this->__get('usuario'));
-            $stmt->bindValue(":senha", $this->__get('senha'));
-            $stmt->execute();
+            try {
+                $query = "select * from administradores where usuario = :usuario and senha = :senha";
+                $stmt = $this->db->prepare($query);
+                $stmt->bindValue(":usuario", $this->__get('usuario'));
+                $stmt->bindValue(":senha", $this->__get('senha'));
+                $stmt->execute();
 
-            return $stmt;
+                return $stmt;
+            } catch(\Exception $e) {
+                echo $e->getCode() . '<br>' . $e->getMessage();
+            }
         }   
     }

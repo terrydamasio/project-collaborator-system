@@ -9,9 +9,9 @@
             <input id="password" type="password" name="senha" placeholder="Digite a senha adm" required>
 
             <?php if(isset($_GET['erro']) && $_GET['erro'] == 'acessonegado') { ?>
-                <p class="error-message">Usuário ou senha inválidos.</p>
+                <small class="error-message">Usuário ou senha inválidos.</small><br>
             <?php } if(isset($_GET['login']) && $_GET['login'] == 'erro') { ?>
-                <p class="error-message">Acesso Negado.</p>
+                <small class="error-message">Acesso Negado.</small><br>
             <?php } ?>
             <br><button type="submit">Login</button>
         </div>
