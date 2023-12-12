@@ -3,7 +3,6 @@
 
 	use MF\Controller\Action;
 	use MF\Model\Container;
-    use App\Session;
 
     session_start();
 
@@ -28,7 +27,6 @@
 
                     header('location: /lista');
                 } else {
-                    echo "OI";
                     header('location: /login?erro=acessonegado');
                 }
             } else {

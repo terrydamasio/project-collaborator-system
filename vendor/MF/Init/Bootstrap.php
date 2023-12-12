@@ -1,8 +1,8 @@
 <?php
     namespace MF\Init;
 
-use App\Route;
-use MF\Controller\HTTPResponse;
+    use App\Route;
+    use MF\Controller\HTTPResponse;
 
     abstract class Bootstrap {
         private $routes;
@@ -24,21 +24,26 @@ use MF\Controller\HTTPResponse;
         }
 
         protected function run($url) {
-            foreach($this->getRoutes() as $key => $route) {
-                
+            $found = false; // -> Flag que indica se a rota foi encontrada
+
+            foreach($this->getRoutes() as $route) {
                 if($url == $route['route']) {
+                    $found = true;
+
                     $class = "App\\Controllers\\" . ucfirst($route['controller']); // -> App\Controllers\[Controller]
-
-                    $controller = new $class; // -> $controller = new App\Controllers\[Controller];
                     
+                    $controller = new $class; // -> $controller = new App\Controllers\[Controller];
                     $action = $route['action'];
-
                     $controller->$action();
 
-                } /*else {
-                    $response = HTTPResponse::notFound('Erro: 404 Recurso não encontrado.');
-                    $response->send();
-                }*/
+                    break;
+
+                } 
+            }
+
+            if(!$found) {
+                $response = HTTPResponse::notFound('<p style="color:red; font-weight: bold;">Erro: 404 Recurso não encontrado.<p>');
+                $response->send();
             }
         }
 

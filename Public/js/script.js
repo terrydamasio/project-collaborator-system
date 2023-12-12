@@ -56,14 +56,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function atualizarHora() {
-    const dataAtual = new Date();
-    const hora = String(dataAtual.getHours()).padStart(2, '0');
-    const minutos = String(dataAtual.getMinutes()).padStart(2, '0');
+// REGISTRO DE PONTO -> Atualizar data e hora
 
-    document.getElementById('hora').textContent = `${hora}:${minutos}`;
+// Atualizar a data
+const dataAtualFormatada = new Date().toLocaleDateString();
+document.getElementById('data').textContent = dataAtualFormatada;
+
+// Preencher a data atual no campo de data
+const dataAtualISO = new Date().toISOString().split('T')[0];
+document.getElementById('data').value = dataAtualISO;
+
+// Preencher a hora atual no campo de hora
+function preencherHora() {
+    const dataAtual = new Date();
+    const horaAtual = String(dataAtual.getHours()).padStart(2, '0');
+    const minutosAtual = String(dataAtual.getMinutes()).padStart(2, '0');
+
+    document.getElementById('hora').value = `${horaAtual}:${minutosAtual}`;
 }
 
+// Chamar a função uma vez para preencher inicialmente
+preencherHora();
+
+// Atualizar a hora a cada segundo
+setInterval(preencherHora, 1000);
+
+// Registrar ponto
 function registrarPonto() {
     const formulario = document.getElementById('formulario-registro');
     const nome = formulario.elements.nome.value;
@@ -75,14 +93,6 @@ function registrarPonto() {
     // Por enquanto, apenas exibimos os dados no console
     console.log(`Nome: ${nome}, Matrícula: ${matricula}, Entrada: ${entrada}, Saída: ${saida}`);
 }
-
-// Atualizar a hora a cada segundo
-setInterval(atualizarHora, 1000);
-
-// Atualizar a data
-const dataAtualFormatada = new Date().toLocaleDateString();
-document.getElementById('data').textContent = dataAtualFormatada;
-
 
 $(document).ready(function() {
     // Adicione um evento para verificar o campo "Ativo?" ao vivo

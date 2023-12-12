@@ -3,7 +3,7 @@
 
     use MF\Controller\Action;
     use MF\Model\Container;
-    use App\Session;
+    use MF\Controller\HTTPResponse;
 
     session_start();
 
