@@ -1,5 +1,6 @@
     <main>
         <h1>Inserir Colaborador</h1>
+        <div id="mensagem"></div>
         <form id="colaboradorForm" action="/inserir" method="post">
             <div class="box-grande">
 
@@ -10,7 +11,7 @@
                     </div>
                     <div class="campo">
                         <label for="ativo">Ativo?</label>
-                        <input type="checkbox" id="ativo" name="ativo" readonly>  <!-- readonly -->
+                        <input type="checkbox" id="checkboxAtivo" name="ativo" checked readonly>  <!-- readonly -->
                     </div>
                 </div>
 
@@ -68,7 +69,7 @@
 
                 <div class="linha">
                     <label for="horarios">Horários</label>
-                    <table>
+                    <table id="tabelaHorarios">
                         <thead>
                             <tr>
                                 <th></th>

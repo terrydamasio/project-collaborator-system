@@ -1,7 +1,8 @@
     <main>
         <h1>Alterar Dados do Colaborador</h1>
+        <div id="mensagem"></div>
         <?php foreach($this->view->colaborador as $colaborador) { ?>
-        <form action="/saveEdit?matricula=<?= $colaborador['matricula'] ?>" method="post">
+        <form id="colaboradorForm" action="/saveEdit?matricula=<?= $colaborador['matricula'] ?>" method="post">
             <div class="box-grande">
                 
                 <div class="linha">
@@ -20,7 +21,7 @@
                     
                     <div class="campo">
                         <label for="ativo">Ativo?</label>
-                        <input type="checkbox" id="ativo" name="ativo">  <!-- readonly -->
+                        <input type="checkbox" id="checkboxAtivo" name="ativo" <?= ($colaborador['ativo'] == true)  ? 'checked' : '' ?> readonly>  <!-- readonly -->
                     </div>
                 </div>
 
@@ -71,7 +72,7 @@
 
                 <div class="linha">
                     <label for="horarios">Horários</label>
-                    <table>
+                    <table id="tabelaHorarios">
                         <thead>
                             <tr>
                                 <th></th>

@@ -188,14 +188,13 @@
                     $this->view->s_sabado_saida = $_POST['s_sabado_saida'];
                     $this->view->s_domingo_entrada = $_POST['s_domingo_entrada'];
                     $this->view->s_domingo_saida = $_POST['s_domingo_saida'];
-                
-                
+                      
                     //verifica se o CPF já existe
                     $existeCPF = $colaboradores->existeCPF();
                     if($existeCPF->rowCount() > 0) {
                         echo json_encode(['cpfExiste' => true]);
                         exit;
-                    } 
+                    }      
 
                     //valida se é um email válido
                     $email = $_POST['email'];
@@ -205,13 +204,6 @@
                     $nome = $_POST["nome"];
                     if (preg_match("/^[A-Z][a-z]+ [A-Z][a-z]+$/", $nome) || preg_match("/^[A-Z][a-z]+(?: [A-Z][a-z]+)+$/", $nome)) {
                         $baseUsuario = strtolower(str_replace(" ", "_", $nome));
-
-                        /*$count = 1;   
-                        $usuarioExiste = $colaboradores->usuarioExiste();
-                        while ($usuarioExiste > 0) {
-                            $usuario = $baseUsuario . $count;
-                            $count++;
-                        }*/ //->>>> SE USUÁRIO JÁ EXISTE, ACRESCENTA +1 no nome (Verificar se está sendo criado no backend)  
                     }
 
                     $colaboradores->inserir();
@@ -284,15 +276,8 @@
                     $nome = $_POST["nome"];
                     if (preg_match("/^[A-Z][a-z]+ [A-Z][a-z]+$/", $nome) || preg_match("/^[A-Z][a-z]+(?: [A-Z][a-z]+)+$/", $nome)) {
                         $baseUsuario = strtolower(str_replace(" ", "_", $nome));
-    
-                        /*$count = 1;   
-                        $usuarioExiste = $colaboradores->usuarioExiste();
-                        while ($usuarioExiste > 0) {
-                            $usuario = $baseUsuario . $count;
-                            $count++;
-                        }*/ //->>>> SE USUÁRIO JÁ EXISTE, ACRESCENTA +1 no nome (Verificar se está sendo criado no backend)  
                     }
-                    
+
                     $colaboradores->alterarDados();
                     header('location: /lista?sucesso=alterar');
                 } else {
