@@ -159,35 +159,7 @@
                     $colaboradores->__set('s_domingo_entrada', $_POST['s_domingo_entrada']);
                     $colaboradores->__set('s_domingo_saida', $_POST['s_domingo_saida']);
 
-                    //criação de variáveis dinâmicas
-                    $this->view->segunda_entrada = $_POST['segunda_entrada'];
-                    $this->view->segunda_saida = $_POST['segunda_saida'];
-                    $this->view->terca_entrada = $_POST['terca_entrada'];
-                    $this->view->terca_saida = $_POST['terca_saida'];
-                    $this->view->quarta_entrada = $_POST['quarta_entrada'];
-                    $this->view->quarta_saida = $_POST['quarta_saida'];
-                    $this->view->quinta_entrada = $_POST['quinta_entrada'];
-                    $this->view->quinta_saida = $_POST['quinta_saida'];
-                    $this->view->sexta_entrada = $_POST['sexta_entrada'];
-                    $this->view->sexta_saida = $_POST['sexta_saida'];
-                    $this->view->sabado_entrada = $_POST['sabado_entrada'];
-                    $this->view->sabado_saida = $_POST['sabado_saida'];
-                    $this->view->domingo_entrada = $_POST['domingo_entrada'];
-                    $this->view->domingo_saida = $_POST['domingo_saida'];
-                    $this->view->s_segunda_entrada = $_POST['s_segunda_entrada'];
-                    $this->view->s_segunda_saida = $_POST['s_segunda_saida'];
-                    $this->view->s_terca_entrada = $_POST['s_terca_entrada'];
-                    $this->view->s_terca_saida = $_POST['s_terca_saida'];
-                    $this->view->s_quarta_entrada = $_POST['s_quarta_entrada'];
-                    $this->view->s_quarta_saida = $_POST['s_quarta_saida'];
-                    $this->view->s_quinta_entrada = $_POST['s_quinta_entrada'];
-                    $this->view->s_quinta_saida = $_POST['s_quinta_saida'];
-                    $this->view->s_sexta_entrada = $_POST['s_sexta_entrada'];
-                    $this->view->s_sexta_saida = $_POST['s_sexta_saida'];
-                    $this->view->s_sabado_entrada = $_POST['s_sabado_entrada'];
-                    $this->view->s_sabado_saida = $_POST['s_sabado_saida'];
-                    $this->view->s_domingo_entrada = $_POST['s_domingo_entrada'];
-                    $this->view->s_domingo_saida = $_POST['s_domingo_saida'];
+                    //IMPLEMENTAR VALIDAÇÃO DE QUADRO DE HORÀRIO
                       
                     //verifica se o CPF já existe
                     $existeCPF = $colaboradores->existeCPF();
@@ -268,6 +240,96 @@
                     $colaboradores->__set('s_domingo_entrada', $_POST['s_domingo_entrada']);
                     $colaboradores->__set('s_domingo_saida', $_POST['s_domingo_saida']);
    
+                    //validar quadro de horários
+                    $segunda_entrada = strtotime($_POST['segunda_entrada']);
+                    $segunda_saida = strtotime($_POST['segunda_saida']);
+                    $terca_entrada = strtotime($_POST['terca_entrada']);
+                    $terca_saida = strtotime($_POST['terca_saida']);
+                    $quarta_entrada = strtotime($_POST['quarta_entrada']);
+                    $quarta_saida = strtotime($_POST['quarta_saida']);
+                    $quinta_entrada = strtotime($_POST['quinta_entrada']);
+                    $quinta_saida = strtotime($_POST['quinta_saida']);
+                    $sexta_entrada = strtotime($_POST['sexta_entrada']);
+                    $sexta_saida = strtotime($_POST['sexta_saida']);
+                    $sabado_entrada = strtotime($_POST['sabado_entrada']);
+                    $sabado_saida = strtotime($_POST['sabado_saida']);
+                    $domingo_entrada = strtotime($_POST['domingo_entrada']);
+                    $domingo_saida = strtotime($_POST['domingo_saida']);
+                    $s_segunda_entrada = strtotime($_POST['s_segunda_entrada']);
+                    $s_segunda_saida = strtotime($_POST['s_segunda_saida']);
+                    $s_terca_entrada = strtotime($_POST['s_terca_entrada']);
+                    $s_terca_saida = strtotime($_POST['s_terca_saida']);
+                    $s_quarta_entrada = strtotime($_POST['s_quarta_entrada']);
+                    $s_quarta_saida = strtotime($_POST['s_quarta_saida']);
+                    $s_quinta_entrada = strtotime($_POST['s_quinta_entrada']);
+                    $s_quinta_saida = strtotime($_POST['s_quinta_saida']);
+                    $s_sexta_entrada = strtotime($_POST['s_sexta_entrada']);
+                    $s_sexta_saida = strtotime($_POST['s_sexta_saida']);
+                    $s_sabado_entrada = strtotime($_POST['s_sabado_entrada']);
+                    $s_sabado_saida = strtotime($_POST['s_sabado_saida']);
+                    $s_domingo_entrada = strtotime($_POST['s_domingo_entrada']);
+                    $s_domingo_saida = strtotime($_POST['s_domingo_saida']);
+
+                    // 2.9.1 e 2.9.2- Os campos de entradas não podem ser maiores que suas respectivas saídas e os campos de saídas não podem ser menores que suas respectivas entradas
+
+                    if($segunda_entrada > $segunda_saida || $terca_entrada > $terca_saida || $quarta_entrada > $quarta_saida || $quinta_entrada > $quinta_saida || $sexta_entrada > $sexta_saida || $sabado_entrada > $sabado_saida || $domingo_entrada > $domingo_saida || $s_segunda_entrada > $s_segunda_saida || $s_terca_entrada > $s_terca_saida || $s_quarta_entrada > $s_quarta_saida || $s_quinta_entrada > $s_quinta_saida || $s_sexta_entrada > $s_sexta_saida || $s_sabado_entrada > $s_sabado_saida || $s_domingo_entrada > $s_domingo_saida) {
+                        header("location: /editar?matricula={$this->view->matricula}&erro=horario-1");
+                        exit;
+                    }
+
+                    // 2.9.3 - Não deverá ser aceito um intervalo menor que 1 (uma) hora entre a primeira saída e a segunda entrada:
+                    $intervaloSegunda = $s_segunda_entrada - $segunda_saida;
+                    $intervaloTerca = $s_terca_entrada - $terca_saida;
+                    $intervaloQuarta = $s_quarta_entrada - $quarta_saida;
+                    $intervaloQuinta = $s_quinta_entrada - $quinta_saida;
+                    $intervaloSexta = $s_sexta_entrada - $sexta_saida;
+                    $intervaloSabado = $s_sabado_entrada - $sabado_saida;
+                    $intervaloDomingo = $s_domingo_entrada - $domingo_saida;
+
+                    if($intervaloSegunda < 3600 || $intervaloTerca < 3600 || $intervaloQuarta < 3600 || $intervaloQuinta < 3600 || $intervaloSexta < 3600 || $intervaloSabado < 3600 /*|| $intervaloDomingo < 3600*/) { //tirar domingo pq domingo não é dia útil
+                        header("location: /editar?matricula={$this->view->matricula}&erro=horario-2");
+                        exit;
+                    }
+
+                    //2.9.4 - Não deverá ser aceito uma primeira entrada com um intervalo menor de 11h desde a segunda saída do dia anterior
+                    $intervaloAnteriorSegunda = $s_domingo_saida - $segunda_entrada;
+                    $intervaloAnteriorTerca = $s_segunda_saida - $terca_entrada;
+                    $intervaloAnteriorQuarta = $s_terca_saida - $quarta_entrada;
+                    $intervaloAnteriorQuinta = $s_quarta_saida - $quinta_entrada;
+                    $intervaloAnteriorSexta = $s_quinta_saida - $sexta_entrada;
+                    $intervaloAnteriorSabado = $s_sexta_saida - $sabado_entrada;
+                    $intervaloAnteriorDomingo = $s_sabado_saida - $domingo_entrada;
+
+                    if(/*$intervaloAnteriorSegunda < 39600 ||*/ $intervaloAnteriorTerca < 39600 || $intervaloAnteriorQuarta < 39600 || $intervaloAnteriorQuinta < 39600 || $intervaloAnteriorSexta < 39600 || $intervaloAnteriorSabado < 39600 || $intervaloAnteriorDomingo < 39600) { //tirar segunda pq domingo não é dia útil
+                        header("location: /editar?matricula={$this->view->matricula}&erro=horario-3");
+                        exit;
+                    }
+
+                    //2.9.5 - O total de horas semanais não podem somar mais que 44 horas 
+                    $totalHoras = 0;
+
+                    $totalHoras += strtotime($_POST['segunda_saida']) - strtotime($_POST['segunda_entrada']);
+                    $totalHoras += strtotime($_POST['terca_saida']) - strtotime($_POST['terca_entrada']);
+                    $totalHoras += strtotime($_POST['quarta_saida']) - strtotime($_POST['quarta_entrada']);
+                    $totalHoras += strtotime($_POST['quinta_saida']) - strtotime($_POST['quinta_entrada']);
+                    $totalHoras += strtotime($_POST['sexta_saida']) - strtotime($_POST['sexta_entrada']);
+                    $totalHoras += strtotime($_POST['sabado_saida']) - strtotime($_POST['sabado_entrada']);
+                    //$totalHoras += strtotime($_POST['domingo_saida']) - strtotime($_POST['domingo_entrada']);
+                    $totalHoras += strtotime($_POST['s_segunda_saida']) - strtotime($_POST['s_segunda_entrada']);
+                    $totalHoras += strtotime($_POST['s_terca_saida']) - strtotime($_POST['s_terca_entrada']);
+                    $totalHoras += strtotime($_POST['s_quarta_saida']) - strtotime($_POST['s_quarta_entrada']);
+                    $totalHoras += strtotime($_POST['s_quinta_saida']) - strtotime($_POST['s_quinta_entrada']);
+                    $totalHoras += strtotime($_POST['s_sexta_saida']) - strtotime($_POST['s_sexta_entrada']);
+                    $totalHoras += strtotime($_POST['s_sabado_saida']) - strtotime($_POST['s_sabado_entrada']);
+                    //$totalHoras += strtotime($_POST['s_domingo_saida']) - strtotime($_POST['s_domingo_entrada']);
+
+                    $horasEstimadas = 44 * 3600; //44 horas semanais 
+
+                    if($totalHoras > $horasEstimadas) {
+                        header("location: /editar?matricula={$this->view->matricula}&erro=horario-4");
+                        exit;
+                    }
+ 
                     //valida se é um email válido
                     $email = $_POST['email'];
                     $this->view->verificaEmail = $this->validarEmail($email);

@@ -1,6 +1,17 @@
     <main>
         <h1>Alterar Dados do Colaborador</h1>
         <div id="mensagem"></div>
+        
+        <?php if(isset($_GET['erro']) && $_GET['erro'] == 'horario-1') { ?>
+            <div class="mensagem-horarios">Erro: O horário de entrada não pode ser maior que a saída.</div>
+        <?php } if(isset($_GET['erro']) && $_GET['erro'] == 'horario-2') { ?>
+            <div class="mensagem-horarios">Erro: Intervalo entre a primeira saída e segunda entrada não pode ser menor que 1 hora.</div>
+        <?php } if(isset($_GET['erro']) && $_GET['erro'] == 'horario-3') { ?>
+            <div class="mensagem-horarios">Erro: Intervalo entre a primeira entrada e a segunda saída do dia anterior não pode ser menor que 11 horas.</div>
+        <?php } if(isset($_GET['erro']) && $_GET['erro'] == 'horario-4') { ?>
+            <div class="mensagem-horarios">Erro: O total de horas semanais não pode ser maior que 44 horas.</div>
+        <?php } ?>
+
         <?php foreach($this->view->colaborador as $colaborador) { ?>
         <form id="colaboradorForm" action="/saveEdit?matricula=<?= $colaborador['matricula'] ?>" method="post">
             <div class="box-grande">

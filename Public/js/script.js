@@ -115,7 +115,7 @@ document.getElementById('colaboradorForm').addEventListener('submit', verificarA
 
 
 
-// 2.10 >> Validar quadro de horários
+/* 2.10 >> Validar quadro de horários
 
 // Adicione ouvintes de eventos para os campos de entrada
 var entradas = document.querySelectorAll('input[name$="_entrada"]');
@@ -155,7 +155,7 @@ function validarHorarios() {
     return true; // Não há erros
 }
 
-
+*/
 
 
 
