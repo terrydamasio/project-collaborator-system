@@ -62,11 +62,7 @@
             $this->view->funcoes = $cargos->getFuncoes();   
             $this->view->verificaEmail = false;
 
-            try {
-                $this->render('inserir', 'layout1');
-            } catch(\Exception $e) {
-                echo $e->getMessage() . "<br>" . $e->getCode();
-            }
+            $this->render('inserir', 'layout1');
         }
 
         //valida e define o padrão de expressão regular para um endereço de e-mail válido
