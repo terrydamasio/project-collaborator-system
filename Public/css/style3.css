@@ -1,0 +1,133 @@
+/* CONFIGURAÇÕES GERAIS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* NAVBAR */
+.nav {
+    width: 100%;
+    box-shadow: 4px 5px 10px rgba(0,0,0,.2);
+    background-color: #f5f8fa;
+}
+
+header {
+    background-color: #f5f8fa;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    max-width: 1230px;
+}
+
+.logo img {
+    display: flex;
+    width: 120px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #238EDE;
+    font-size: 1.2em;
+}
+
+/* MAIN */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registro-ponto {
+    text-align: center;
+}
+
+form {
+    background-color: #ececec;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin-top: 150px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    text-align: left;
+    padding: 5px;
+    text-align: center;
+}
+
+input {
+    width: 50%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #e4d8d8;
+    border-radius: 3px;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+#data-hora {
+    width: 100%;
+
+}
+
+#data {
+    width: 100%;
+    font-size: 2em;
+    /*border: transparent;*/
+    text-align: center;
+} 
+#hora {
+    width: 100%;
+    font-size: 1.5em;
+    border: transparent;
+    text-align: center;
+}
+
+#lista-colaboradores {
+    list-style: none;
+    padding: 0;
+}
+
+.nome-colaborador {
+    font-weight: bold;
+}
+
+#btn-registrar {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#btn-registrar:hover {
+    background-color: #0056b3;
+    transition: 0.5s;
+}
+
+.matricula {
+    border: transparent;
+}

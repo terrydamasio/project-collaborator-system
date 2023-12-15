@@ -1,26 +1,91 @@
+ 
     <div class="container">
         <div class="registro-ponto">
-            <form id="formulario-registro">
+            <?php if($_GET['registro'] && $_GET['registro'] == 'sucesso') { ?>
+                <div id="mensagem-sucesso">Registro de ponto efetuado com sucesso!</div>
+            <?php } ?>
+
+            <form id="formulario-registro" action="/registrarPonto" method="post">
                 <div id="data-hora">
-                    <input type="date" id="data" name="data" disabled>
-                    <input type="time" id="hora" name="hora" disabled>
+                    <input type="date" id="data" name="data" readonly>
+                    <input type="time" id="hora" name="hora" readonly>
                 </div>
 
                 <label for="nome">Nome do Colaborador:</label>
-                <select id="cargos" name="cargo" required>
-                    <option value="#">Colaborador 1</option>
+                <select id="cargos" name="cargo" onchange="atualizarMatricula(this)">
+                    <?php foreach($this->view->colaboradores as $colaborador) { ?>
+                        <option value="<?= $colaborador['matricula'] ?>"><?= $colaborador['nome'] ?></option>
+                    <?php } ?> 
                 </select>
 
                 <label for="matricula">Matrícula:</label>
-                <input type="text" id="matricula" name="matricula" required readonly>
+                <input type="text" id="matricula" name="matricula" readonly>
 
                 <label for="entrada">Horário de Entrada:</label>
-                <input type="time" id="entrada" name="entrada" required>
+                <input type="time" id="entrada" name="entrada" readonly>
+                <input type="time" id="entrada" name="entrada" readonly>
 
                 <label for="saida">Horário de Saída:</label>
-                <input type="time" id="saida" name="saida" required>
+                <input type="time" id="saida" name="saida" readonly>
+                <input type="time" id="saida" name="saida" readonly>
 
-                <button type="button" id="btn-registrar" onclick="registrarPonto()">Registrar</button>
+                <br>
+                <button type="submit" id="btn-registrar">Registrar</button>
             </form>
         </div>
     </div>
+
+
+
+
+
+    <script>
+        //Atualizar matrícula dinamicamente
+        function atualizarMatricula(select) {
+            // Obtém a opção selecionada
+            var selectedOption = select.options[select.selectedIndex];
+            
+            // Obtém o valor da matrícula associada à opção selecionada
+            var matriculaValue = selectedOption.value;
+            
+            // Atualiza o valor do campo "Matrícula"
+            document.getElementById("matricula").value = matriculaValue;
+        }
+
+        // REGISTRO DE PONTO -> Atualizar data e hora
+        document.addEventListener("DOMContentLoaded", function() {
+            // Função para formatar um número com zero à esquerda, se necessário
+            function formatNumber(number) {
+                return number < 10 ? "0" + number : number;
+            }
+
+            // Função para obter a data e hora atuais
+            function getCurrentDateTime() {
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = formatNumber(now.getMonth() + 1);
+                var day = formatNumber(now.getDate());
+                var hours = formatNumber(now.getHours());
+                var minutes = formatNumber(now.getMinutes());
+
+                return {
+                    date: year + "-" + month + "-" + day,
+                    time: hours + ":" + minutes
+                };
+            }
+
+            // Função para atualizar os campos de data e hora
+            function updateDateTimeFields() {
+                var currentDateTime = getCurrentDateTime();
+                document.getElementById("data").value = currentDateTime.date;
+                document.getElementById("hora").value = currentDateTime.time;
+            }
+
+            // Chame a função inicialmente para exibir a data e hora atuais
+            updateDateTimeFields();
+
+            // Agende a atualização a cada minuto (60000 milissegundos)
+            setInterval(updateDateTimeFields, 60000);
+        });
+
+    </script>

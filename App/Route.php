@@ -13,6 +13,12 @@
                 'action' => 'index'
             );
 
+            $routes['registrarPonto'] = array(
+                'route' => '/registrarPonto',
+                'controller' => 'IndexController',
+                'action' => 'registrarPonto'
+            );
+
             $routes['login'] = array(
 				'route' => '/login',
 				'controller' => 'IndexController',

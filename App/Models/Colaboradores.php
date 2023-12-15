@@ -139,7 +139,7 @@
         //listar colaboradores
         public function getColaboradores() {
             try {
-                $query = "  select count(*) as total from colaboradores inner join cargos on colaboradores.cargo = cargos.id_cargo";
+                $query = "select count(*) as total from colaboradores inner join cargos on colaboradores.cargo = cargos.id_cargo";
                 $stmt = $this->db->prepare($query);
                 $stmt->execute();
 
@@ -153,7 +153,7 @@
         //listar colaboradores por pagina
         public function getColaboradoresPorPagina($limit, $offset) {
             try {
-                $query = "  select colaboradores.matricula, colaboradores.nome, colaboradores.email, cargos.nome_cargo from colaboradores inner join cargos on colaboradores.cargo = cargos.id_cargo order by matricula desc limit $limit offset $offset";
+                $query = "select colaboradores.matricula, colaboradores.nome, colaboradores.email, cargos.nome_cargo from colaboradores inner join cargos on colaboradores.cargo = cargos.id_cargo order by matricula desc limit $limit offset $offset";
                 $stmt = $this->db->prepare($query);
                 $stmt->execute();
 
@@ -185,6 +185,20 @@
                 WHERE matricula = :matricula";
                 $stmt = $this->db->prepare($query);
                 $stmt->bindValue(':matricula', $this->__get('matricula'));
+                $stmt->execute();
+
+                return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                
+            } catch(\Exception $e) {
+                echo $e->getCode() . '<br>' . $e->getMessage();
+            }
+        }
+
+        //deletar colaboradores
+        public function selecionarColaborador() {
+            try {
+                $query = "select * from colaboradores";
+                $stmt = $this->db->prepare($query);
                 $stmt->execute();
 
                 return $stmt->fetchAll(\PDO::FETCH_ASSOC);
