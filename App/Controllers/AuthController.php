@@ -7,7 +7,7 @@
     session_start();
 
 	class AuthController extends Action {
-
+        
         public function autenticar() {
 
             if(!empty($_POST['usuario']) && !empty($_POST['senha'])) {
